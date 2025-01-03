@@ -178,9 +178,20 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupDto"
+                  }
+                }
+              }
+            }
           }
         },
+        "summary": "Get all groups",
         "tags": [
           "Tenant / Group"
         ]
@@ -210,9 +221,17 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Create a group",
         "tags": [
           "Tenant / Group"
         ]
@@ -728,6 +747,21 @@
           "name",
           "countryCode",
           "currencyCode"
+        ]
+      },
+      "GroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "id"
         ]
       },
       "CreateGroupDto": {
