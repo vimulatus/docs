@@ -268,7 +268,14 @@
             }
           },
           "404": {
-            "description": "Role with id not found inside current company"
+            "description": "Role with id not found inside current company",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                }
+              }
+            }
           }
         },
         "summary": "Get a role by id",
@@ -921,6 +928,58 @@
         "required": [
           "status",
           "data"
+        ]
+      },
+      "ErrorDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "The HTTP status code of the error",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "description": "The message of the error",
+            "example": "Invalid request"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "ErrorResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "path": {
+            "type": "string",
+            "format": "uri",
+            "description": "The path of the request",
+            "example": "/roles"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The timestamp of the error",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDto"
+          }
+        },
+        "required": [
+          "status",
+          "path",
+          "timestamp",
+          "error"
         ]
       },
       "CreateRoleDto": {
