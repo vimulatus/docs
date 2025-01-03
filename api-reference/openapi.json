@@ -267,8 +267,8 @@
               }
             }
           },
-          "404": {
-            "description": "Role with id not found inside current company",
+          "400": {
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -276,11 +276,49 @@
                 },
                 "example": {
                   "status": "error",
-                  "timestamp": "2025-01-03T07:23:07.637Z",
-                  "path": "/roles/1",
+                  "timestamp": "2025-01-03T07:43:54.911Z",
+                  "path": "/roles/24977ea3-ccb6-4b67-b3de-8f838f484d60",
+                  "error": {
+                    "code": 400,
+                    "message": "Invalid Request"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:43:54.910Z",
+                  "path": "/roles/24977ea3-ccb6-4b67-b3de-8f838f484d60",
                   "error": {
                     "code": 404,
-                    "message": "Role with id 1 not found inside current company"
+                    "message": "Role with id not found inside current company"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:43:54.911Z",
+                  "path": "/roles/24977ea3-ccb6-4b67-b3de-8f838f484d60",
+                  "error": {
+                    "code": 500,
+                    "message": "Internal Server Error"
                   }
                 }
               }
