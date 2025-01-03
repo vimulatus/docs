@@ -403,7 +403,7 @@
             "name": "name",
             "required": false,
             "in": "query",
-            "description": "The name of the account to search for",
+            "description": "Filter by account name",
             "schema": {
               "type": "string"
             }
@@ -467,7 +467,7 @@
         ]
       }
     },
-    "/inventory/item": {
+    "/inventory/item/{id}": {
       "get": {
         "operationId": "ItemController_find",
         "parameters": [
@@ -481,28 +481,9 @@
             }
           },
           {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "description": "The name of the item to find",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sku",
-            "required": false,
-            "in": "query",
-            "description": "The SKU of the item to find. If provided, `name` is ignored",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "id",
-            "required": false,
-            "in": "query",
-            "description": "The ID of the item to find. If provided, the other fields are ignored",
+            "required": true,
+            "in": "path",
             "schema": {
               "type": "string"
             }
@@ -514,12 +495,125 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/GetItemResponseDto"
                 }
               }
             }
           }
         },
+        "summary": "Get an item by id",
+        "tags": [
+          "Company / Item"
+        ]
+      }
+    },
+    "/inventory/item/{sku}": {
+      "get": {
+        "operationId": "ItemController_findBySku",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sku",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an item by sku",
+        "tags": [
+          "Company / Item"
+        ]
+      }
+    },
+    "/inventory/item/{name}": {
+      "get": {
+        "operationId": "ItemController_findByName",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an item by name",
+        "tags": [
+          "Company / Item"
+        ]
+      }
+    },
+    "/inventory/item": {
+      "get": {
+        "operationId": "ItemController_findAll",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all items",
         "tags": [
           "Company / Item"
         ]
@@ -549,9 +643,17 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Create an item",
         "tags": [
           "Company / Item"
         ]
@@ -598,9 +700,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Delete an item",
         "tags": [
           "Company / Item"
         ]
@@ -1104,6 +1214,107 @@
           "data"
         ]
       },
+      "ItemDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item",
+            "example": "Gold Ring"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the item",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "sku": {
+            "type": "string",
+            "description": "The sku of the item",
+            "example": "GR-5-10K-101"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the item",
+            "example": "Gold ring with 10K gold and 5mm diameter"
+          },
+          "unitId": {
+            "type": "string",
+            "description": "The unit id of the item",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "cost": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The cost of the item",
+            "example": 100
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The price of the item",
+            "example": 150
+          },
+          "msp": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The msp of the item",
+            "example": 120
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "sku",
+          "unitId",
+          "cost",
+          "price",
+          "msp"
+        ]
+      },
+      "GetItemResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllItemsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
       "CreateItemDto": {
         "type": "object",
         "properties": {
@@ -1134,6 +1345,22 @@
           "unitId",
           "cost",
           "price"
+        ]
+      },
+      "ResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          }
+        },
+        "required": [
+          "status"
         ]
       }
     }
