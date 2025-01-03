@@ -807,7 +807,7 @@
             }
           }
         },
-        "summary": "Get all groups of an item",
+        "summary": "Get all item groups of an item",
         "tags": [
           "Company / Item"
         ]
