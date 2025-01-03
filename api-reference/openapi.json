@@ -258,7 +258,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRoleResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -292,7 +299,14 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRoleResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -314,7 +328,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllRolesResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -656,7 +677,6 @@
             "example": "29AAACD1234E1Z5"
           },
           "logoOrIcon": {
-            "nullable": true,
             "description": "The logo or lucide icon name of the company",
             "example": {
               "type": "logo",
@@ -688,6 +708,7 @@
         },
         "required": [
           "name",
+          "logoOrIcon",
           "countryCode",
           "currencyCode",
           "createdById"
@@ -719,12 +740,7 @@
             "example": "29AAACD1234E1Z5"
           },
           "logoOrIcon": {
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LogoOrIcon"
-              }
-            ]
+            "$ref": "#/components/schemas/LogoOrIcon"
           },
           "countryCode": {
             "type": "string",
@@ -742,6 +758,7 @@
         "required": [
           "id",
           "name",
+          "logoOrIcon",
           "countryCode",
           "currencyCode"
         ]
@@ -860,6 +877,46 @@
           "data"
         ]
       },
+      "RoleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ]
+      },
+      "GetRoleResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RoleDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
       "CreateRoleDto": {
         "type": "object",
         "properties": {
@@ -876,6 +933,29 @@
         },
         "required": [
           "name"
+        ]
+      },
+      "GetAllRolesResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
         ]
       },
       "CreateAccountDto": {
