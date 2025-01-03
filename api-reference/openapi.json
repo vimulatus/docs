@@ -190,7 +190,7 @@
         },
         "summary": "Get all groups in a company",
         "tags": [
-          "Tenant / Group"
+          "Company / Group"
         ]
       },
       "post": {
@@ -230,7 +230,7 @@
         },
         "summary": "Create a group",
         "tags": [
-          "Tenant / Group"
+          "Company / Group"
         ]
       }
     },
@@ -271,9 +271,9 @@
             "description": "Role with id not found inside current company"
           }
         },
-        "summary": "Get a role by id inside a company",
+        "summary": "Get a role by id",
         "tags": [
-          "Tenant / Role"
+          "Company / Role"
         ]
       }
     },
@@ -315,7 +315,7 @@
         },
         "summary": "Create a role",
         "tags": [
-          "Tenant / Role"
+          "Company / Role"
         ]
       },
       "get": {
@@ -343,9 +343,9 @@
             }
           }
         },
-        "summary": "Get all roles in a company",
+        "summary": "Get all roles",
         "tags": [
-          "Tenant / Role"
+          "Company / Role"
         ]
       }
     },
@@ -379,7 +379,7 @@
           }
         },
         "tags": [
-          "Tenant / Account"
+          "Company / Account"
         ]
       },
       "get": {
@@ -409,7 +409,7 @@
           }
         },
         "tags": [
-          "Tenant / Account"
+          "Company / Account"
         ]
       }
     },
@@ -441,7 +441,7 @@
           }
         },
         "tags": [
-          "Tenant / Account"
+          "Company / Account"
         ]
       }
     },
@@ -499,7 +499,7 @@
           }
         },
         "tags": [
-          "Tenant / Item"
+          "Company / Item"
         ]
       },
       "post": {
@@ -531,7 +531,7 @@
           }
         },
         "tags": [
-          "Tenant / Item"
+          "Company / Item"
         ]
       },
       "delete": {
@@ -580,7 +580,7 @@
           }
         },
         "tags": [
-          "Tenant / Item"
+          "Company / Item"
         ]
       }
     },
@@ -612,7 +612,7 @@
           }
         },
         "tags": [
-          "Tenant / Item"
+          "Company / Item"
         ]
       }
     }
