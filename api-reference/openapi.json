@@ -276,10 +276,10 @@
                 },
                 "example": {
                   "status": "error",
-                  "timestamp": "2025-01-03T07:43:54.911Z",
-                  "path": "/roles/24977ea3-ccb6-4b67-b3de-8f838f484d60",
+                  "timestamp": "2025-01-03T07:59:28.409Z",
+                  "path": "/roles/4d1ba1dd-91c8-41d2-a3ba-474e85e08671",
                   "error": {
-                    "code": 400,
+                    "code": "BAD_REQUEST",
                     "message": "Invalid Request"
                   }
                 }
@@ -295,10 +295,10 @@
                 },
                 "example": {
                   "status": "error",
-                  "timestamp": "2025-01-03T07:43:54.910Z",
-                  "path": "/roles/24977ea3-ccb6-4b67-b3de-8f838f484d60",
+                  "timestamp": "2025-01-03T07:59:28.410Z",
+                  "path": "/roles/4d1ba1dd-91c8-41d2-a3ba-474e85e08671",
                   "error": {
-                    "code": 404,
+                    "code": "NOT_FOUND",
                     "message": "Role with id not found inside current company"
                   }
                 }
@@ -314,10 +314,10 @@
                 },
                 "example": {
                   "status": "error",
-                  "timestamp": "2025-01-03T07:43:54.911Z",
-                  "path": "/roles/24977ea3-ccb6-4b67-b3de-8f838f484d60",
+                  "timestamp": "2025-01-03T07:59:28.410Z",
+                  "path": "/roles/4d1ba1dd-91c8-41d2-a3ba-474e85e08671",
                   "error": {
-                    "code": 500,
+                    "code": "INTERNAL_SERVER_ERROR",
                     "message": "Internal Server Error"
                   }
                 }
@@ -365,6 +365,63 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:59:28.411Z",
+                  "path": "/roles",
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid Request"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:59:28.411Z",
+                  "path": "/roles",
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "Requested Resource Not Found"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:59:28.411Z",
+                  "path": "/roles",
+                  "error": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "message": "Internal Server Error"
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Create a role",
@@ -392,6 +449,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAllRolesResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:59:28.411Z",
+                  "path": "/roles",
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid Request"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:59:28.411Z",
+                  "path": "/roles",
+                  "error": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "message": "Internal Server Error"
+                  }
                 }
               }
             }
@@ -981,9 +1076,9 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "number",
-            "description": "The HTTP status code of the error",
-            "example": 400
+            "type": "string",
+            "description": "The HTTP status of the error",
+            "example": "BAD_REQUEST"
           },
           "message": {
             "type": "string",
