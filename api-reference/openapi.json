@@ -273,6 +273,15 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponseDto"
+                },
+                "example": {
+                  "status": "error",
+                  "timestamp": "2025-01-03T07:23:07.637Z",
+                  "path": "/roles/1",
+                  "error": {
+                    "code": 404,
+                    "message": "Role with id 1 not found inside current company"
+                  }
                 }
               }
             }
