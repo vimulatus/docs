@@ -46,16 +46,18 @@
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://mintlify.com/blog"
+    },
+    {
+      "name": "API Reference",
+      "openapi": "./api-reference/openapi.json",
+      "url": "api-reference",
+      "icon": "square-terminal"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "introduction",
-        "quickstart",
-        "development"
-      ]
+      "pages": ["introduction", "quickstart", "development"]
     },
     {
       "group": "Essentials",
@@ -70,9 +72,7 @@
     },
     {
       "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
+      "pages": ["api-reference/introduction"]
     },
     {
       "group": "Endpoint Examples",
