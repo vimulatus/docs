@@ -21,7 +21,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDto"
+                  "$ref": "#/components/schemas/GetCompanyResponseDto"
                 }
               }
             }
@@ -52,10 +52,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CompanyDto"
-                  }
+                  "$ref": "#/components/schemas/GetAllCompaniesResponseDto"
                 }
               }
             }
@@ -88,7 +85,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDto"
+                  "$ref": "#/components/schemas/GetCompanyResponseDto"
                 }
               }
             }
@@ -121,10 +118,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDto"
+                  "$ref": "#/components/schemas/GetCompanyResponseDto"
                 }
               }
             }
+          },
+          "404": {
+            "description": "Default Company not found"
           }
         },
         "summary": "Get the default company for a user",
@@ -182,16 +182,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GroupDto"
-                  }
+                  "$ref": "#/components/schemas/GetCompanyGroupsResponseDto"
                 }
               }
             }
           }
         },
-        "summary": "Get all groups",
+        "summary": "Get all groups in a company",
         "tags": [
           "Tenant / Group"
         ]
@@ -225,7 +222,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GroupDto"
+                  "$ref": "#/components/schemas/CreateGroupResponseDto"
                 }
               }
             }
@@ -749,6 +746,49 @@
           "currencyCode"
         ]
       },
+      "GetCompanyResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CompanyDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllCompaniesResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompanyDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
       "GroupDto": {
         "type": "object",
         "properties": {
@@ -764,6 +804,29 @@
           "id"
         ]
       },
+      "GetCompanyGroupsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
       "CreateGroupDto": {
         "type": "object",
         "properties": {
@@ -775,6 +838,26 @@
         },
         "required": [
           "name"
+        ]
+      },
+      "CreateGroupResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
         ]
       },
       "CreateRoleDto": {
