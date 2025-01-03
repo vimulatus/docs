@@ -906,6 +906,252 @@
           "Company / Item"
         ]
       }
+    },
+    "/item-groups": {
+      "post": {
+        "operationId": "ItemGroupController_create",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemGroupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemGroupResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new item group",
+        "tags": [
+          "Company / Item Group"
+        ]
+      },
+      "get": {
+        "operationId": "ItemGroupController_findAll",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemGroupsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all item groups",
+        "tags": [
+          "Company / Item Group"
+        ]
+      }
+    },
+    "/item-groups/{id}/items": {
+      "get": {
+        "operationId": "ItemGroupController_findAllItems",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all items in a item groups",
+        "tags": [
+          "Company / Item Group"
+        ]
+      }
+    },
+    "/item-groups/{id}/items/{itemId}": {
+      "delete": {
+        "operationId": "ItemGroupController_removeItemFromGroup",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Remove an item from a item group",
+        "tags": [
+          "Company / Item Group"
+        ]
+      },
+      "put": {
+        "operationId": "ItemGroupController_addItemToGroup",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Add an item to a item group",
+        "tags": [
+          "Company / Item Group"
+        ]
+      }
+    },
+    "/item-groups/{id}": {
+      "get": {
+        "operationId": "ItemGroupController_get",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemGroupResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a item group by id",
+        "tags": [
+          "Company / Item Group"
+        ]
+      }
     }
   },
   "info": {
@@ -1711,6 +1957,45 @@
             "items": {
               "$ref": "#/components/schemas/ItemGroupDto"
             }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "CreateItemGroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item group",
+            "example": "Electronics"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the item group",
+            "example": "A group of electronics items"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "GetItemGroupResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemGroupDto"
           }
         },
         "required": [
