@@ -505,6 +505,44 @@
         "tags": [
           "Company / Item"
         ]
+      },
+      "delete": {
+        "operationId": "ItemController_deleteById",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete an item by id",
+        "tags": [
+          "Company / Item"
+        ]
       }
     },
     "/inventory/item/{sku}": {
@@ -545,6 +583,44 @@
         "tags": [
           "Company / Item"
         ]
+      },
+      "delete": {
+        "operationId": "ItemController_deleteBySku",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sku",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete an item by sku",
+        "tags": [
+          "Company / Item"
+        ]
       }
     },
     "/inventory/item/{name}": {
@@ -582,6 +658,44 @@
           }
         },
         "summary": "Get an item by name",
+        "tags": [
+          "Company / Item"
+        ]
+      },
+      "delete": {
+        "operationId": "ItemController_deleteByName",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete an item by name",
         "tags": [
           "Company / Item"
         ]
@@ -657,63 +771,6 @@
         "tags": [
           "Company / Item"
         ]
-      },
-      "delete": {
-        "operationId": "ItemController_delete",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "description": "The name of the item to find",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sku",
-            "required": false,
-            "in": "query",
-            "description": "The SKU of the item to find. If provided, `name` is ignored",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": false,
-            "in": "query",
-            "description": "The ID of the item to find. If provided, the other fields are ignored",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete an item",
-        "tags": [
-          "Company / Item"
-        ]
       }
     },
     "/inventory/item/{id}/groups": {
@@ -740,9 +797,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemGroupsResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Get all groups of an item",
         "tags": [
           "Company / Item"
         ]
@@ -1240,7 +1305,7 @@
           },
           "unitId": {
             "type": "string",
-            "description": "The unit id of the item",
+            "description": "The id of the unit of the item",
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "cost": {
@@ -1361,6 +1426,54 @@
         },
         "required": [
           "status"
+        ]
+      },
+      "ItemGroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item group",
+            "example": "Gold Jewelry"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the item group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the item group",
+            "example": "Item Group 1 Description"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ]
+      },
+      "GetAllItemGroupsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemGroupDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
         ]
       }
     }
