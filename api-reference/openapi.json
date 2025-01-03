@@ -165,19 +165,39 @@
     "/groups": {
       "get": {
         "operationId": "GroupController_getGroups",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
           }
         },
         "tags": [
-          "Group"
+          "Tenant / Group"
         ]
       },
       "post": {
         "operationId": "GroupController_createGroup",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -194,7 +214,7 @@
           }
         },
         "tags": [
-          "Group"
+          "Tenant / Group"
         ]
       }
     },
@@ -202,6 +222,15 @@
       "get": {
         "operationId": "RoleController_findById",
         "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "required": true,
@@ -217,14 +246,24 @@
           }
         },
         "tags": [
-          "Role"
+          "Tenant / Role"
         ]
       }
     },
     "/roles": {
       "post": {
         "operationId": "RoleController_create",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -241,26 +280,46 @@
           }
         },
         "tags": [
-          "Role"
+          "Tenant / Role"
         ]
       },
       "get": {
         "operationId": "RoleController_findAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
           }
         },
         "tags": [
-          "Role"
+          "Tenant / Role"
         ]
       }
     },
     "/accounts": {
       "post": {
         "operationId": "AccountController_create",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -277,12 +336,21 @@
           }
         },
         "tags": [
-          "Account"
+          "Tenant / Account"
         ]
       },
       "get": {
         "operationId": "AccountController_findAll",
         "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "name",
             "required": true,
@@ -298,7 +366,7 @@
           }
         },
         "tags": [
-          "Account"
+          "Tenant / Account"
         ]
       }
     },
@@ -306,6 +374,15 @@
       "get": {
         "operationId": "AccountController_findById",
         "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "required": true,
@@ -321,7 +398,7 @@
           }
         },
         "tags": [
-          "Account"
+          "Tenant / Account"
         ]
       }
     },
@@ -329,6 +406,15 @@
       "get": {
         "operationId": "ItemController_find",
         "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "name",
             "required": false,
@@ -370,12 +456,22 @@
           }
         },
         "tags": [
-          "Item"
+          "Tenant / Item"
         ]
       },
       "post": {
         "operationId": "ItemController_create",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -392,12 +488,21 @@
           }
         },
         "tags": [
-          "Item"
+          "Tenant / Item"
         ]
       },
       "delete": {
         "operationId": "ItemController_delete",
         "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "name",
             "required": false,
@@ -432,7 +537,7 @@
           }
         },
         "tags": [
-          "Item"
+          "Tenant / Item"
         ]
       }
     },
@@ -440,6 +545,15 @@
       "get": {
         "operationId": "ItemController_getGroups",
         "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "required": true,
@@ -455,7 +569,7 @@
           }
         },
         "tags": [
-          "Item"
+          "Tenant / Item"
         ]
       }
     }
@@ -474,6 +588,13 @@
   ],
   "servers": [],
   "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
     "schemas": {
       "LogoOrIcon": {
         "type": "object",
