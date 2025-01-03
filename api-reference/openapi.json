@@ -162,6 +162,100 @@
         ]
       }
     },
+    "/user": {
+      "post": {
+        "operationId": "UserController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a user",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "operationId": "UserController_getUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a user by id",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/{email}": {
+      "get": {
+        "operationId": "UserController_getUserByEmail",
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a user by email",
+        "tags": [
+          "User"
+        ]
+      }
+    },
     "/groups": {
       "get": {
         "operationId": "GroupController_getGroups",
@@ -1002,6 +1096,154 @@
             "items": {
               "$ref": "#/components/schemas/CompanyDto"
             }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The keycloak id of the user",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the user",
+            "example": "John Doe"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the user",
+            "example": "john_doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user",
+            "example": "john.doe@example.com"
+          },
+          "emailVerified": {
+            "type": "boolean",
+            "description": "Whether the email is verified",
+            "example": true
+          },
+          "phone": {
+            "type": "object",
+            "description": "The phone number of the user",
+            "example": "+919876543210"
+          },
+          "phoneVerified": {
+            "type": "boolean",
+            "description": "Whether the phone number is verified",
+            "example": true
+          },
+          "avatar": {
+            "type": "object",
+            "description": "The avatar of the user",
+            "example": "https://example.com/avatar.png"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "username",
+          "email"
+        ]
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the user",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the user",
+            "example": "John Doe"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the user",
+            "example": "john_doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user",
+            "example": "john.doe@example.com"
+          },
+          "emailVerified": {
+            "type": "boolean",
+            "description": "Whether the email is verified",
+            "example": true
+          },
+          "gender": {
+            "type": "object",
+            "description": "The gender of the user",
+            "example": "Male"
+          },
+          "dob": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true,
+            "description": "The date of birth of the user",
+            "example": "1990-01-01"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true,
+            "format": "mobile-phone",
+            "description": "The phone number of the user",
+            "example": "+919876543210"
+          },
+          "phoneVerified": {
+            "type": "boolean",
+            "description": "Whether the phone number is verified",
+            "example": true
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "description": "The avatar of the user",
+            "example": "https://example.com/avatar.png"
+          },
+          "age": {
+            "type": "number",
+            "nullable": true,
+            "description": "The age of the user",
+            "example": 25
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "username",
+          "email",
+          "gender",
+          "phoneVerified"
+        ]
+      },
+      "GetUserResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserDto"
           }
         },
         "required": [
