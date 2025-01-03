@@ -48,9 +48,20 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyDto"
+                  }
+                }
+              }
+            }
           }
         },
+        "summary": "Get all companies by user",
         "tags": [
           "Company"
         ]
@@ -110,12 +121,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/CompanyDto"
                 }
               }
             }
           }
         },
+        "summary": "Get the default company for a user",
         "tags": [
           "Company"
         ]
@@ -141,6 +153,7 @@
             "description": ""
           }
         },
+        "summary": "Migrate a company",
         "tags": [
           "Company"
         ]
