@@ -266,8 +266,12 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Role with id not found inside current company"
           }
         },
+        "summary": "Get a role by id inside a company",
         "tags": [
           "Tenant / Role"
         ]
@@ -309,6 +313,7 @@
             }
           }
         },
+        "summary": "Create a role",
         "tags": [
           "Tenant / Role"
         ]
@@ -338,6 +343,7 @@
             }
           }
         },
+        "summary": "Get all roles in a company",
         "tags": [
           "Tenant / Role"
         ]
