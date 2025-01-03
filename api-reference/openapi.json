@@ -17,7 +17,14 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyDto"
+                }
+              }
+            }
           }
         },
         "summary": "Create a company",
@@ -66,9 +73,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Get a company by id",
         "tags": [
           "Company"
         ]
@@ -246,10 +261,18 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "object"
+            "type": "string",
+            "enum": [
+              "logo",
+              "icon"
+            ],
+            "description": "The type of the logo or icon",
+            "example": "logo"
           },
           "urlOrName": {
-            "type": "string"
+            "type": "string",
+            "description": "The url or name of the logo or icon",
+            "example": "https://example.com/logo.png"
           }
         },
         "required": [
@@ -313,6 +336,59 @@
           "countryCode",
           "currencyCode",
           "createdById"
+        ]
+      },
+      "CompanyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the company",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the company",
+            "example": "Acme Corp"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the company",
+            "example": "A company that makes widgets"
+          },
+          "gstin": {
+            "type": "string",
+            "nullable": true,
+            "description": "The GSTIN of the company",
+            "example": "29AAACD1234E1Z5"
+          },
+          "logoOrIcon": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogoOrIcon"
+              }
+            ]
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "The country code of the company",
+            "example": "IN",
+            "default": "IN"
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "The currency code of the company",
+            "example": "INR",
+            "default": "INR"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "countryCode",
+          "currencyCode"
         ]
       },
       "CreateGroupDto": {
