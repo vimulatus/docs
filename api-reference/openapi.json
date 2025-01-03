@@ -266,63 +266,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.409Z",
-                  "path": "/roles/4d1ba1dd-91c8-41d2-a3ba-474e85e08671",
-                  "error": {
-                    "code": "BAD_REQUEST",
-                    "message": "Invalid Request"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.410Z",
-                  "path": "/roles/4d1ba1dd-91c8-41d2-a3ba-474e85e08671",
-                  "error": {
-                    "code": "NOT_FOUND",
-                    "message": "Role with id not found inside current company"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.410Z",
-                  "path": "/roles/4d1ba1dd-91c8-41d2-a3ba-474e85e08671",
-                  "error": {
-                    "code": "INTERNAL_SERVER_ERROR",
-                    "message": "Internal Server Error"
-                  }
-                }
-              }
-            }
           }
         },
         "summary": "Get a role by id",
@@ -365,63 +308,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.411Z",
-                  "path": "/roles",
-                  "error": {
-                    "code": "BAD_REQUEST",
-                    "message": "Invalid Request"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.411Z",
-                  "path": "/roles",
-                  "error": {
-                    "code": "NOT_FOUND",
-                    "message": "Requested Resource Not Found"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.411Z",
-                  "path": "/roles",
-                  "error": {
-                    "code": "INTERNAL_SERVER_ERROR",
-                    "message": "Internal Server Error"
-                  }
-                }
-              }
-            }
           }
         },
         "summary": "Create a role",
@@ -449,44 +335,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAllRolesResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.411Z",
-                  "path": "/roles",
-                  "error": {
-                    "code": "BAD_REQUEST",
-                    "message": "Invalid Request"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseDto"
-                },
-                "example": {
-                  "status": "error",
-                  "timestamp": "2025-01-03T07:59:28.411Z",
-                  "path": "/roles",
-                  "error": {
-                    "code": "INTERNAL_SERVER_ERROR",
-                    "message": "Internal Server Error"
-                  }
                 }
               }
             }
@@ -524,9 +372,17 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Create an account",
         "tags": [
           "Company / Account"
         ]
@@ -545,8 +401,9 @@
           },
           {
             "name": "name",
-            "required": true,
+            "required": false,
             "in": "query",
+            "description": "The name of the account to search for",
             "schema": {
               "type": "string"
             }
@@ -554,9 +411,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllAccountsResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Get all accounts",
         "tags": [
           "Company / Account"
         ]
@@ -586,9 +451,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Get an account by id",
         "tags": [
           "Company / Account"
         ]
@@ -1072,58 +945,6 @@
           "data"
         ]
       },
-      "ErrorDto": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "The HTTP status of the error",
-            "example": "BAD_REQUEST"
-          },
-          "message": {
-            "type": "string",
-            "description": "The message of the error",
-            "example": "Invalid request"
-          }
-        },
-        "required": [
-          "code",
-          "message"
-        ]
-      },
-      "ErrorResponseDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "success",
-              "error"
-            ],
-            "example": "success"
-          },
-          "path": {
-            "type": "string",
-            "format": "uri",
-            "description": "The path of the request",
-            "example": "/roles"
-          },
-          "timestamp": {
-            "type": "string",
-            "description": "The timestamp of the error",
-            "example": "2021-01-01T00:00:00.000Z"
-          },
-          "error": {
-            "$ref": "#/components/schemas/ErrorDto"
-          }
-        },
-        "required": [
-          "status",
-          "path",
-          "timestamp",
-          "error"
-        ]
-      },
       "CreateRoleDto": {
         "type": "object",
         "properties": {
@@ -1194,6 +1015,93 @@
         "required": [
           "name",
           "groupId"
+        ]
+      },
+      "AccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true,
+            "description": "The charts of account code of the account",
+            "example": "110011"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the account",
+            "example": "Cash account"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The group id of the account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true,
+            "description": "The currency code of the account",
+            "example": "USD",
+            "default": "INR"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "groupId"
+        ]
+      },
+      "GetAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AccountDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllAccountsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
         ]
       },
       "CreateItemDto": {
