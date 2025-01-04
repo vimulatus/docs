@@ -33,45 +33,12 @@
         ]
       },
       "get": {
-        "operationId": "CompanyController_getAllCompaniesByUser",
-        "parameters": [
-          {
-            "name": "userId",
-            "required": true,
-            "in": "query",
-            "description": "The id of the user for which the companies are to be fetched",
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllCompaniesResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all companies by user",
-        "tags": [
-          "Company"
-        ]
-      }
-    },
-    "/company/{id}": {
-      "get": {
         "operationId": "CompanyController_getCompany",
         "parameters": [
           {
             "name": "id",
             "required": true,
-            "in": "path",
+            "in": "query",
             "description": "The id of the company",
             "schema": {
               "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -122,12 +89,76 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "Default Company not found"
           }
         },
         "summary": "Get the default company for a user",
+        "tags": [
+          "Company"
+        ]
+      },
+      "patch": {
+        "operationId": "CompanyController_updateDefaultCompany",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "The id of the user for which the default company is to be updated",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyId",
+            "required": true,
+            "in": "query",
+            "description": "The id of the company to be set as default",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update the default company for a user",
+        "tags": [
+          "Company"
+        ]
+      }
+    },
+    "/company/all": {
+      "get": {
+        "operationId": "CompanyController_getAllCompaniesByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "The id of the user for which the companies are to be fetched",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllCompaniesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all companies by user",
         "tags": [
           "Company"
         ]
@@ -561,7 +592,7 @@
         ]
       }
     },
-    "/inventory/item/{id}": {
+    "/inventory/item": {
       "get": {
         "operationId": "ItemController_find",
         "parameters": [
@@ -577,7 +608,53 @@
           {
             "name": "id",
             "required": true,
-            "in": "path",
+            "in": "query",
+            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sku",
+            "required": false,
+            "in": "query",
+            "description": "The sku of the item to select. If provided, `name` is ignored.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "The name of the item to select.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": true,
+            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "description": "The sku of the item to select. If provided, `name` is ignored.",
+            "name": "sku",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "description": "The name of the item to select.",
+            "name": "name",
+            "in": "query",
             "schema": {
               "type": "string"
             }
@@ -596,232 +673,6 @@
           }
         },
         "summary": "Get an item by id",
-        "tags": [
-          "Company / Item"
-        ]
-      },
-      "delete": {
-        "operationId": "ItemController_deleteById",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete an item by id",
-        "tags": [
-          "Company / Item"
-        ]
-      }
-    },
-    "/inventory/item/{sku}": {
-      "get": {
-        "operationId": "ItemController_findBySku",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sku",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetItemResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get an item by sku",
-        "tags": [
-          "Company / Item"
-        ]
-      },
-      "delete": {
-        "operationId": "ItemController_deleteBySku",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sku",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete an item by sku",
-        "tags": [
-          "Company / Item"
-        ]
-      }
-    },
-    "/inventory/item/{name}": {
-      "get": {
-        "operationId": "ItemController_findByName",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetItemResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get an item by name",
-        "tags": [
-          "Company / Item"
-        ]
-      },
-      "delete": {
-        "operationId": "ItemController_deleteByName",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete an item by name",
-        "tags": [
-          "Company / Item"
-        ]
-      }
-    },
-    "/inventory/item": {
-      "get": {
-        "operationId": "ItemController_findAll",
-        "parameters": [
-          {
-            "name": "X-Company-Id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all items",
         "tags": [
           "Company / Item"
         ]
@@ -862,6 +713,122 @@
           }
         },
         "summary": "Create an item",
+        "tags": [
+          "Company / Item"
+        ]
+      },
+      "delete": {
+        "operationId": "ItemController_delete",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sku",
+            "required": false,
+            "in": "query",
+            "description": "The sku of the item to select. If provided, `name` is ignored.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "The name of the item to select.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": true,
+            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "description": "The sku of the item to select. If provided, `name` is ignored.",
+            "name": "sku",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": false,
+            "description": "The name of the item to select.",
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete an item",
+        "tags": [
+          "Company / Item"
+        ]
+      }
+    },
+    "/inventory/item/all": {
+      "get": {
+        "operationId": "ItemController_findAll",
+        "parameters": [
+          {
+            "name": "X-Company-Id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all items",
         "tags": [
           "Company / Item"
         ]
