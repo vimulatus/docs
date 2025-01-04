@@ -607,7 +607,7 @@
           },
           {
             "name": "id",
-            "required": true,
+            "required": false,
             "in": "query",
             "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
             "schema": {
@@ -633,7 +633,7 @@
             }
           },
           {
-            "required": true,
+            "required": false,
             "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
             "name": "id",
             "in": "query",
@@ -731,7 +731,7 @@
           },
           {
             "name": "id",
-            "required": true,
+            "required": false,
             "in": "query",
             "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
             "schema": {
@@ -757,7 +757,7 @@
             }
           },
           {
-            "required": true,
+            "required": false,
             "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
             "name": "id",
             "in": "query",
