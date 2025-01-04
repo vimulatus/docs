@@ -292,7 +292,7 @@
         "operationId": "GroupController_getGroups",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -322,7 +322,7 @@
         "operationId": "GroupController_createGroup",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -364,7 +364,7 @@
         "operationId": "RoleController_findById",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -404,7 +404,7 @@
         "operationId": "RoleController_create",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -444,7 +444,7 @@
         "operationId": "RoleController_findAll",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -476,7 +476,7 @@
         "operationId": "AccountController_create",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -516,7 +516,7 @@
         "operationId": "AccountController_findAll",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -557,7 +557,7 @@
         "operationId": "AccountController_findById",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -597,7 +597,7 @@
         "operationId": "ItemController_find",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -681,7 +681,7 @@
         "operationId": "ItemController_create",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -721,7 +721,7 @@
         "operationId": "ItemController_delete",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -807,7 +807,7 @@
         "operationId": "ItemController_findAll",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -839,7 +839,7 @@
         "operationId": "ItemController_getGroups",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -879,7 +879,7 @@
         "operationId": "ItemGroupController_create",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -919,7 +919,7 @@
         "operationId": "ItemGroupController_findAll",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -951,7 +951,7 @@
         "operationId": "ItemGroupController_findAllItems",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -991,7 +991,7 @@
         "operationId": "ItemGroupController_removeItemFromGroup",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -1037,7 +1037,7 @@
         "operationId": "ItemGroupController_addItemToGroup",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
@@ -1085,7 +1085,7 @@
         "operationId": "ItemGroupController_get",
         "parameters": [
           {
-            "name": "X-Company-Id",
+            "name": "x-company-id",
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
