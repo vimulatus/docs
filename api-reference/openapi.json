@@ -287,7 +287,7 @@
         ]
       }
     },
-    "/groups": {
+    "/auth/group": {
       "get": {
         "operationId": "GroupController_getGroups",
         "parameters": [
@@ -315,7 +315,7 @@
         },
         "summary": "Get all groups in a company",
         "tags": [
-          "Company / Group"
+          "Company / Auth / Group"
         ]
       },
       "post": {
@@ -355,11 +355,11 @@
         },
         "summary": "Create a group",
         "tags": [
-          "Company / Group"
+          "Company / Auth / Group"
         ]
       }
     },
-    "/roles/{id}": {
+    "/auth/role/{id}": {
       "get": {
         "operationId": "RoleController_findById",
         "parameters": [
@@ -395,11 +395,11 @@
         },
         "summary": "Get a role by id",
         "tags": [
-          "Company / Role"
+          "Company / Auth / Role"
         ]
       }
     },
-    "/roles": {
+    "/auth/role": {
       "post": {
         "operationId": "RoleController_create",
         "parameters": [
@@ -437,7 +437,7 @@
         },
         "summary": "Create a role",
         "tags": [
-          "Company / Role"
+          "Company / Auth / Role"
         ]
       },
       "get": {
@@ -467,11 +467,11 @@
         },
         "summary": "Get all roles",
         "tags": [
-          "Company / Role"
+          "Company / Auth / Role"
         ]
       }
     },
-    "/accounts": {
+    "/bookkeeping/account": {
       "post": {
         "operationId": "AccountController_create",
         "parameters": [
@@ -509,7 +509,7 @@
         },
         "summary": "Create an account",
         "tags": [
-          "Company / Account"
+          "Company / Bookkeeping / Account"
         ]
       },
       "get": {
@@ -548,11 +548,11 @@
         },
         "summary": "Get all accounts",
         "tags": [
-          "Company / Account"
+          "Company / Bookkeeping / Account"
         ]
       }
     },
-    "/accounts/{id}": {
+    "/bookkeeping/account/{id}": {
       "get": {
         "operationId": "AccountController_findById",
         "parameters": [
@@ -588,7 +588,7 @@
         },
         "summary": "Get an account by id",
         "tags": [
-          "Company / Account"
+          "Company / Bookkeeping / Account"
         ]
       }
     },
@@ -674,7 +674,7 @@
         },
         "summary": "Get an item by id",
         "tags": [
-          "Company / Item"
+          "Company / Inventory / Item"
         ]
       },
       "post": {
@@ -714,7 +714,7 @@
         },
         "summary": "Create an item",
         "tags": [
-          "Company / Item"
+          "Company / Inventory / Item"
         ]
       },
       "delete": {
@@ -798,7 +798,7 @@
         },
         "summary": "Delete an item",
         "tags": [
-          "Company / Item"
+          "Company / Inventory / Item"
         ]
       }
     },
@@ -830,7 +830,7 @@
         },
         "summary": "Get all items",
         "tags": [
-          "Company / Item"
+          "Company / Inventory / Item"
         ]
       }
     },
@@ -870,11 +870,11 @@
         },
         "summary": "Get all item groups of an item",
         "tags": [
-          "Company / Item"
+          "Company / Inventory / Item"
         ]
       }
     },
-    "/item-groups": {
+    "/inventory/item-group": {
       "post": {
         "operationId": "ItemGroupController_create",
         "parameters": [
@@ -912,7 +912,7 @@
         },
         "summary": "Create a new item group",
         "tags": [
-          "Company / Item Group"
+          "Company / Inventory / Item Group"
         ]
       },
       "get": {
@@ -942,11 +942,11 @@
         },
         "summary": "Get all item groups",
         "tags": [
-          "Company / Item Group"
+          "Company / Inventory / Item Group"
         ]
       }
     },
-    "/item-groups/{id}/items": {
+    "/inventory/item-group/{id}/items": {
       "get": {
         "operationId": "ItemGroupController_findAllItems",
         "parameters": [
@@ -982,11 +982,11 @@
         },
         "summary": "Get all items in a item groups",
         "tags": [
-          "Company / Item Group"
+          "Company / Inventory / Item Group"
         ]
       }
     },
-    "/item-groups/{id}/items/{itemId}": {
+    "/inventory/item-group/{id}/items/{itemId}": {
       "delete": {
         "operationId": "ItemGroupController_removeItemFromGroup",
         "parameters": [
@@ -1030,7 +1030,7 @@
         },
         "summary": "Remove an item from a item group",
         "tags": [
-          "Company / Item Group"
+          "Company / Inventory / Item Group"
         ]
       },
       "put": {
@@ -1076,11 +1076,11 @@
         },
         "summary": "Add an item to a item group",
         "tags": [
-          "Company / Item Group"
+          "Company / Inventory / Item Group"
         ]
       }
     },
-    "/item-groups/{id}": {
+    "/inventory/item-group/{id}": {
       "get": {
         "operationId": "ItemGroupController_get",
         "parameters": [
@@ -1116,7 +1116,7 @@
         },
         "summary": "Get a item group by id",
         "tags": [
-          "Company / Item Group"
+          "Company / Inventory / Item Group"
         ]
       }
     }
@@ -1766,20 +1766,32 @@
           "cost": {
             "type": "number",
             "minimum": 0,
-            "description": "The cost of the item",
+            "description": "The cost of the item. Minimum value is 0",
             "example": 100
           },
           "price": {
             "type": "number",
             "minimum": 0,
-            "description": "The price of the item",
+            "description": "The price of the item. Minimum value is 0",
             "example": 150
           },
           "msp": {
             "type": "number",
             "minimum": 0,
-            "description": "The msp of the item",
+            "description": "The msp of the item. Minimum value is 0",
             "example": 120
+          },
+          "stock": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The stock of the item. Minimum value is 0",
+            "example": 100
+          },
+          "reorderPoint": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The reorder point of the item. Minimum value is 0",
+            "example": 10
           }
         },
         "required": [
@@ -1789,7 +1801,8 @@
           "unitId",
           "cost",
           "price",
-          "msp"
+          "msp",
+          "reorderPoint"
         ]
       },
       "GetItemResponseDto": {
@@ -1839,25 +1852,54 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "The name of the item",
+            "example": "Apple"
           },
           "sku": {
-            "type": "string"
+            "type": "string",
+            "description": "The SKU of the item",
+            "example": "APPLE-123"
           },
           "unitId": {
-            "type": "string"
+            "type": "string",
+            "description": "The unit id of the item",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "cost": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "description": "The cost of the item. Minimum value is 0",
+            "example": 1.99
           },
           "price": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "description": "The price of the item. Minimum value is 0",
+            "example": 2.99
           },
           "msp": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "description": "The minimum selling price of the item. Minimum value is 0",
+            "example": 2.89
+          },
+          "stock": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The stock of the item. Minimum value is 0",
+            "example": 100
+          },
+          "reorderPoint": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The reorder point of the item. Minimum value is 0",
+            "example": 10
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "The description of the item",
+            "example": "A delicious apple"
           }
         },
         "required": [
