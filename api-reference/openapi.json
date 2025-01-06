@@ -1065,6 +1065,321 @@
           "Company / Inventory / Item Group"
         ]
       }
+    },
+    "/inventory/unit": {
+      "get": {
+        "operationId": "UnitController_findById",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUnitResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit"
+        ]
+      },
+      "post": {
+        "operationId": "UnitController_create",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUnitDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUnitResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit"
+        ]
+      }
+    },
+    "/inventory/unit/all": {
+      "get": {
+        "operationId": "UnitController_findAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllUnitsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit"
+        ]
+      }
+    },
+    "/inventory/unit/conversion": {
+      "post": {
+        "operationId": "UnitConversionController_create",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUnitConversionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUnitConversionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit / Conversion"
+        ]
+      },
+      "get": {
+        "operationId": "UnitConversionController_getAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "The unit to convert from",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "The unit to convert to",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllUnitConversionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit / Conversion"
+        ]
+      },
+      "patch": {
+        "operationId": "UnitConversionController_update",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "description": "The unit to convert from",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "description": "The unit to convert to",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnitConversionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUnitConversionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit / Conversion"
+        ]
+      },
+      "delete": {
+        "operationId": "UnitConversionController_delete",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "description": "The unit to convert from",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "description": "The unit to convert to",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Unit / Conversion"
+        ]
+      }
     }
   },
   "info": {
@@ -1957,6 +2272,255 @@
           "status",
           "data"
         ]
+      },
+      "UnitDisplayNameDto": {
+        "type": "object",
+        "properties": {
+          "plural": {
+            "type": "string",
+            "description": "The plural form of the unit",
+            "example": "Kilograms"
+          },
+          "singular": {
+            "type": "string",
+            "description": "The singular form of the unit",
+            "example": "Kilogram"
+          },
+          "abbreviation": {
+            "type": "string",
+            "description": "The abbreviation of the unit",
+            "example": "kg"
+          }
+        },
+        "required": [
+          "singular"
+        ]
+      },
+      "UnitDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the unit",
+            "example": "Kilogram"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the unit",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "displayName": {
+            "description": "The display name of the unit",
+            "example": {
+              "plural": "Kilograms",
+              "singular": "Kilogram",
+              "abbreviation": "kg"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnitDisplayNameDto"
+              }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the unit",
+            "example": "A unit of mass"
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "displayName"
+        ]
+      },
+      "GetUnitResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UnitDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllUnitsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "CreateUnitDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the unit",
+            "example": "Kilogram"
+          },
+          "displayName": {
+            "description": "The display name of the unit",
+            "example": "Kilogram",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnitDisplayNameDto"
+              }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the unit",
+            "example": "A unit of mass"
+          }
+        },
+        "required": [
+          "name",
+          "displayName"
+        ]
+      },
+      "CreateUnitConversionDto": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "The unit to convert from",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "to": {
+            "type": "string",
+            "description": "The unit to convert to",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "factor": {
+            "type": "number",
+            "minimum": 1,
+            "description": "The conversion factor",
+            "example": 1.5
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "factor"
+        ]
+      },
+      "UnitConversionDto": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "The unit to convert from",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "to": {
+            "type": "string",
+            "description": "The unit to convert to",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "factor": {
+            "type": "number",
+            "minimum": 1,
+            "description": "The conversion factor",
+            "example": 1.5
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "factor"
+        ]
+      },
+      "GetUnitConversionResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UnitConversionDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllUnitConversionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitConversionDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "UpdateUnitConversionDto": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "The unit to convert from",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "to": {
+            "type": "string",
+            "description": "The unit to convert to",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "factor": {
+            "type": "number",
+            "minimum": 1,
+            "description": "The conversion factor",
+            "example": 1.5
+          }
+        }
       }
     }
   }
