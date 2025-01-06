@@ -645,7 +645,7 @@
             }
           }
         },
-        "summary": "Get an item by id",
+        "summary": "Get an item",
         "tags": [
           "Company / Inventory / Item"
         ]
@@ -1068,7 +1068,7 @@
     },
     "/inventory/unit": {
       "get": {
-        "operationId": "UnitController_findById",
+        "operationId": "UnitController_findOne",
         "parameters": [
           {
             "name": "x-company-id",
@@ -1108,6 +1108,7 @@
             }
           }
         },
+        "summary": "Get a unit",
         "tags": [
           "Company / Inventory / Unit"
         ]
@@ -1147,6 +1148,7 @@
             }
           }
         },
+        "summary": "Create a unit",
         "tags": [
           "Company / Inventory / Unit"
         ]
@@ -1178,6 +1180,7 @@
             }
           }
         },
+        "summary": "Get all units",
         "tags": [
           "Company / Inventory / Unit"
         ]
@@ -1219,6 +1222,7 @@
             }
           }
         },
+        "summary": "Create a unit conversion",
         "tags": [
           "Company / Inventory / Unit / Conversion"
         ]
@@ -1268,6 +1272,7 @@
             }
           }
         },
+        "summary": "Get unit conversions by source unit, target unit or both",
         "tags": [
           "Company / Inventory / Unit / Conversion"
         ]
@@ -1327,6 +1332,7 @@
             }
           }
         },
+        "summary": "Update a unit conversion",
         "tags": [
           "Company / Inventory / Unit / Conversion"
         ]
@@ -1376,6 +1382,7 @@
             }
           }
         },
+        "summary": "Delete a unit conversion",
         "tags": [
           "Company / Inventory / Unit / Conversion"
         ]
