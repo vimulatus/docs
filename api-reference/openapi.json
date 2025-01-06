@@ -631,33 +631,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "required": false,
-            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "description": "The sku of the item to select. If provided, `name` is ignored.",
-            "name": "sku",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "description": "The name of the item to select.",
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -752,33 +725,6 @@
             "required": false,
             "in": "query",
             "description": "The name of the item to select.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "description": "The sku of the item to select. If provided, `name` is ignored.",
-            "name": "sku",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "required": false,
-            "description": "The name of the item to select.",
-            "name": "name",
-            "in": "query",
             "schema": {
               "type": "string"
             }
