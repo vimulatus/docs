@@ -1921,7 +1921,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "type": "object"
+            "type": "object",
+            "description": "The data of the account"
           }
         },
         "required": [
