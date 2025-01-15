@@ -1922,7 +1922,7 @@
         "properties": {
           "data": {
             "description": "The data of the account",
-            "anyOf": [
+            "oneOf": [
               {
                 "type": "object",
                 "$ref": "#/components/schemas/CreatePersonalAccountDto"
