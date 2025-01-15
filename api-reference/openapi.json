@@ -471,6 +471,127 @@
         ]
       }
     },
+    "/bookkeeping/account-group": {
+      "post": {
+        "operationId": "AccountGroupController_createAccountGroup",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountGroupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Company / Bookkeeping / Account Group"
+        ]
+      }
+    },
+    "/bookkeeping/account-group/all": {
+      "get": {
+        "operationId": "AccountGroupController_getAccountGroups",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Company / Bookkeeping / Account Group"
+        ]
+      }
+    },
+    "/bookkeeping/account-group/{id}": {
+      "get": {
+        "operationId": "AccountGroupController_getAccountGroup",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Company / Bookkeeping / Account Group"
+        ]
+      }
+    },
+    "/bookkeeping/account": {
+      "post": {
+        "operationId": "AccountController_createAccount",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Bookkeeping / Account"
+        ]
+      }
+    },
     "/inventory/item": {
       "get": {
         "operationId": "ItemController_find",
@@ -1761,6 +1882,25 @@
         "required": [
           "status",
           "data"
+        ]
+      },
+      "CreateAccountGroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the account group",
+            "example": "Customers"
+          },
+          "controlAccountId": {
+            "type": "number",
+            "description": "The control account id",
+            "example": 1
+          }
+        },
+        "required": [
+          "name",
+          "controlAccountId"
         ]
       },
       "ItemDto": {
