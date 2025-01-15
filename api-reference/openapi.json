@@ -471,127 +471,6 @@
         ]
       }
     },
-    "/bookkeeping/account": {
-      "post": {
-        "operationId": "AccountController_create",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAccountDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAccountResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create an account",
-        "tags": [
-          "Company / Bookkeeping / Account"
-        ]
-      },
-      "get": {
-        "operationId": "AccountController_findAll",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "description": "Filter by account name",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllAccountsResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all accounts",
-        "tags": [
-          "Company / Bookkeeping / Account"
-        ]
-      }
-    },
-    "/bookkeeping/account/{id}": {
-      "get": {
-        "operationId": "AccountController_findById",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAccountResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get an account by id",
-        "tags": [
-          "Company / Bookkeeping / Account"
-        ]
-      }
-    },
     "/inventory/item": {
       "get": {
         "operationId": "ItemController_find",
@@ -768,7 +647,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
+                  "$ref": "#/components/schemas/GetAllItemsWithClosingStockResponseDto"
                 }
               }
             }
@@ -1081,7 +960,7 @@
           },
           {
             "name": "id",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "type": "string"
@@ -1089,7 +968,7 @@
           },
           {
             "name": "name",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "type": "string"
@@ -1884,124 +1763,6 @@
           "data"
         ]
       },
-      "CreateAccountDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the account",
-            "example": "Jane"
-          },
-          "groupId": {
-            "type": "string",
-            "description": "The ID of the group",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "currencyCode": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "required": [
-          "name",
-          "groupId"
-        ]
-      },
-      "AccountDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The id of the account",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the account",
-            "example": "Cash"
-          },
-          "code": {
-            "type": "string",
-            "nullable": true,
-            "description": "The charts of account code of the account",
-            "example": "110011"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true,
-            "description": "The description of the account",
-            "example": "Cash account"
-          },
-          "groupId": {
-            "type": "string",
-            "description": "The group id of the account",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "currencyCode": {
-            "type": "string",
-            "nullable": true,
-            "description": "The currency code of the account",
-            "example": "USD",
-            "default": "INR"
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "groupId"
-        ]
-      },
-      "GetAccountResponseDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "success",
-              "error"
-            ],
-            "example": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/AccountDto"
-          }
-        },
-        "required": [
-          "status",
-          "data"
-        ]
-      },
-      "GetAllAccountsResponseDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "success",
-              "error"
-            ],
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AccountDto"
-            }
-          }
-        },
-        "required": [
-          "status",
-          "data"
-        ]
-      },
       "ItemDto": {
         "type": "object",
         "properties": {
@@ -2049,12 +1810,6 @@
             "description": "The msp of the item. Minimum value is 0",
             "example": 120
           },
-          "stock": {
-            "type": "number",
-            "minimum": 0,
-            "description": "The stock of the item. Minimum value is 0",
-            "example": 100
-          },
           "reorderPoint": {
             "type": "number",
             "minimum": 0,
@@ -2093,7 +1848,79 @@
           "data"
         ]
       },
-      "GetAllItemsResponseDto": {
+      "ItemWithClosingStockDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item",
+            "example": "Gold Ring"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the item",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "sku": {
+            "type": "string",
+            "description": "The sku of the item",
+            "example": "GR-5-10K-101"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the item",
+            "example": "Gold ring with 10K gold and 5mm diameter"
+          },
+          "unitId": {
+            "type": "string",
+            "description": "The id of the unit of the item",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "cost": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The cost of the item. Minimum value is 0",
+            "example": 100
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The price of the item. Minimum value is 0",
+            "example": 150
+          },
+          "msp": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The msp of the item. Minimum value is 0",
+            "example": 120
+          },
+          "reorderPoint": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The reorder point of the item. Minimum value is 0",
+            "example": 10
+          },
+          "closingStock": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The closing stock of the item. Minimum value is 0",
+            "example": 10
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "sku",
+          "unitId",
+          "cost",
+          "price",
+          "msp",
+          "reorderPoint",
+          "closingStock"
+        ]
+      },
+      "GetAllItemsWithClosingStockResponseDto": {
         "type": "object",
         "properties": {
           "status": {
@@ -2107,7 +1934,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ItemDto"
+              "$ref": "#/components/schemas/ItemWithClosingStockDto"
             }
           }
         },
@@ -2152,12 +1979,6 @@
             "description": "The minimum selling price of the item. Minimum value is 0",
             "example": 2.89
           },
-          "stock": {
-            "type": "number",
-            "minimum": 0,
-            "description": "The stock of the item. Minimum value is 0",
-            "example": 100
-          },
           "reorderPoint": {
             "type": "number",
             "minimum": 0,
@@ -2168,13 +1989,20 @@
             "type": "string",
             "description": "The description of the item",
             "example": "A delicious apple"
+          },
+          "openingStock": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The opening stock of the item. Minimum value is 0",
+            "example": 10
           }
         },
         "required": [
           "name",
           "unitId",
           "cost",
-          "price"
+          "price",
+          "openingStock"
         ]
       },
       "ResponseDto": {
@@ -2273,6 +2101,29 @@
           },
           "data": {
             "$ref": "#/components/schemas/ItemGroupDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllItemsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemDto"
+            }
           }
         },
         "required": [
@@ -2394,13 +2245,7 @@
             "example": "Kilogram"
           },
           "displayName": {
-            "description": "The display name of the unit",
-            "example": "Kilogram",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UnitDisplayNameDto"
-              }
-            ]
+            "$ref": "#/components/schemas/UnitDisplayNameDto"
           },
           "description": {
             "type": "string",
