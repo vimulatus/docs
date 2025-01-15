@@ -1917,6 +1917,90 @@
           "controlAccountId"
         ]
       },
+      "CreatePersonalAccountDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "gstin": {
+            "type": "object",
+            "description": "The GSTIN of the account",
+            "example": "29AABCD1234E1Z5"
+          },
+          "addressId": {
+            "type": "object",
+            "description": "The id of the address",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "bankAccountId": {
+            "type": "object",
+            "description": "The id of the bank account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
+      "CreateNominalAccountDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
+      "CreateRealAccountDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
       "CreateAccountDto": {
         "type": "object",
         "properties": {
