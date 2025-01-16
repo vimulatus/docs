@@ -497,7 +497,14 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountGroupResponseDto"
+                }
+              }
+            }
           }
         },
         "summary": "Create a new account group",
@@ -522,7 +529,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllAccountGroupsResponseDto"
+                }
+              }
+            }
           }
         },
         "summary": "Get all account groups",
@@ -555,7 +569,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountGroupResponseDto"
+                }
+              }
+            }
           }
         },
         "summary": "Get an account group by id",
@@ -1949,6 +1970,157 @@
           "controlAccountId"
         ]
       },
+      "AccountNature": {
+        "type": "string",
+        "enum": [
+          "PERSONAL",
+          "REAL",
+          "NOMINAL"
+        ]
+      },
+      "AccountType": {
+        "type": "string",
+        "enum": [
+          "ASSET",
+          "LIABILITY",
+          "EQUITY",
+          "INCOME",
+          "EXPENSE"
+        ]
+      },
+      "BalanceType": {
+        "type": "string",
+        "enum": [
+          "DEBIT",
+          "CREDIT"
+        ]
+      },
+      "ControlAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The unique identifier of the control account",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the control account",
+            "example": "Cash"
+          },
+          "nature": {
+            "description": "The nature of the control account",
+            "example": "PERSONAL",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountNature"
+              }
+            ]
+          },
+          "type": {
+            "description": "The type of the control account",
+            "example": "ASSET",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountType"
+              }
+            ]
+          },
+          "nominalBalance": {
+            "description": "The nominal balance of the control account",
+            "example": "DEBIT",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BalanceType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "nature",
+          "type",
+          "nominalBalance"
+        ]
+      },
+      "AccountGroupDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account group",
+            "example": "Assets"
+          },
+          "controlAccount": {
+            "description": "The control account of the account group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlAccountDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "controlAccount"
+        ]
+      },
+      "GetAccountGroupResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "description": "The account group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountGroupDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllAccountGroupsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "description": "The account groups",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountGroupDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
       "CreatePersonalAccountDto": {
         "type": "object",
         "properties": {
@@ -1963,9 +2135,14 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "The type of the account",
-            "example": "PERSONAL"
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
           },
           "gstin": {
             "type": "object",
@@ -2003,9 +2180,14 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "The type of the account",
-            "example": "PERSONAL"
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
           }
         },
         "required": [
@@ -2028,9 +2210,14 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "The type of the account",
-            "example": "PERSONAL"
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
           }
         },
         "required": [
@@ -2083,9 +2270,14 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "The type of the account",
-            "example": "PERSONAL"
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
           },
           "gstin": {
             "type": "object",
@@ -2129,9 +2321,14 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "The type of the account",
-            "example": "PERSONAL"
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
           }
         },
         "required": [
@@ -2160,9 +2357,14 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object",
+            "type": "string",
             "description": "The type of the account",
-            "example": "PERSONAL"
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
           }
         },
         "required": [
