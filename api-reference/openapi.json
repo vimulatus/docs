@@ -606,6 +606,38 @@
         ]
       }
     },
+    "/bookkeeping/account/all": {
+      "get": {
+        "operationId": "AccountController_getAllAccounts",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllAccountsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all accounts",
+        "tags": [
+          "Company / Bookkeeping / Account"
+        ]
+      }
+    },
     "/inventory/item": {
       "get": {
         "operationId": "ItemController_find",
@@ -2167,6 +2199,42 @@
                 "$ref": "#/components/schemas/RealAccountDto"
               }
             ]
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllAccountsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "$ref": "#/components/schemas/PersonalAccountDto"
+                },
+                {
+                  "type": "object",
+                  "$ref": "#/components/schemas/NominalAccountDto"
+                },
+                {
+                  "type": "object",
+                  "$ref": "#/components/schemas/RealAccountDto"
+                }
+              ]
+            }
           }
         },
         "required": [
