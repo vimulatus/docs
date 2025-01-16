@@ -594,7 +594,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/GetAccountResponseDto"
                 }
               }
             }
@@ -1930,6 +1930,11 @@
             "description": "The id of the account group",
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
+          "type": {
+            "type": "object",
+            "description": "The type of the account",
+            "example": "PERSONAL"
+          },
           "gstin": {
             "type": "object",
             "description": "The GSTIN of the account",
@@ -1944,9 +1949,6 @@
             "type": "object",
             "description": "The id of the bank account",
             "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "type": {
-            "type": "object"
           }
         },
         "required": [
@@ -1969,7 +1971,9 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object"
+            "type": "object",
+            "description": "The type of the account",
+            "example": "PERSONAL"
           }
         },
         "required": [
@@ -1992,7 +1996,9 @@
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "type": {
-            "type": "object"
+            "type": "object",
+            "description": "The type of the account",
+            "example": "PERSONAL"
           }
         },
         "required": [
@@ -2023,6 +2029,148 @@
           }
         },
         "required": [
+          "data"
+        ]
+      },
+      "PersonalAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "object",
+            "description": "The type of the account",
+            "example": "PERSONAL"
+          },
+          "gstin": {
+            "type": "object",
+            "description": "The GSTIN of the account",
+            "example": "29AABCD1234E1Z5"
+          },
+          "addressId": {
+            "type": "object",
+            "description": "The id of the address",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "bankAccountId": {
+            "type": "object",
+            "description": "The id of the bank account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
+      "NominalAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "object",
+            "description": "The type of the account",
+            "example": "PERSONAL"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
+      "RealAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "object",
+            "description": "The type of the account",
+            "example": "PERSONAL"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
+      "GetAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "description": "The data of the account",
+            "oneOf": [
+              {
+                "type": "object",
+                "$ref": "#/components/schemas/PersonalAccountDto"
+              },
+              {
+                "type": "object",
+                "$ref": "#/components/schemas/NominalAccountDto"
+              },
+              {
+                "type": "object",
+                "$ref": "#/components/schemas/RealAccountDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "status",
           "data"
         ]
       },
