@@ -659,6 +659,78 @@
         ]
       }
     },
+    "/bookkeeping/control-account": {
+      "get": {
+        "operationId": "ControlAccountController_getAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllControlAccountsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all control accounts",
+        "tags": [
+          "Company / Bookkeeping / Control Account"
+        ]
+      }
+    },
+    "/bookkeeping/control-account/{id}": {
+      "get": {
+        "operationId": "ControlAccountController_getOne",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetControlAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a control account by id",
+        "tags": [
+          "Company / Bookkeeping / Control Account"
+        ]
+      }
+    },
     "/inventory/item": {
       "get": {
         "operationId": "ItemController_find",
@@ -2437,6 +2509,55 @@
                 }
               ]
             }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetAllControlAccountsResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "description": "The control accounts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ControlAccountDto"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "GetControlAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "description": "The control account",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlAccountDto"
+              }
+            ]
           }
         },
         "required": [
