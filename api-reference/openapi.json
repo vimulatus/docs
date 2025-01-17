@@ -511,9 +511,7 @@
         "tags": [
           "Company / Bookkeeping / Account Group"
         ]
-      }
-    },
-    "/bookkeeping/account-group/all": {
+      },
       "get": {
         "operationId": "AccountGroupController_getAccountGroups",
         "parameters": [
@@ -625,9 +623,7 @@
         "tags": [
           "Company / Bookkeeping / Account"
         ]
-      }
-    },
-    "/bookkeeping/account/all": {
+      },
       "get": {
         "operationId": "AccountController_getAllAccounts",
         "parameters": [
@@ -919,46 +915,6 @@
         ]
       }
     },
-    "/inventory/item/{id}/groups": {
-      "get": {
-        "operationId": "ItemController_getGroups",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllItemGroupsResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all item groups of an item",
-        "tags": [
-          "Company / Inventory / Item"
-        ]
-      }
-    },
     "/inventory/item-group": {
       "post": {
         "operationId": "ItemGroupController_create",
@@ -1031,140 +987,6 @@
         ]
       }
     },
-    "/inventory/item-group/{id}/items": {
-      "get": {
-        "operationId": "ItemGroupController_findAllItems",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all items in a item groups",
-        "tags": [
-          "Company / Inventory / Item Group"
-        ]
-      }
-    },
-    "/inventory/item-group/{id}/items/{itemId}": {
-      "delete": {
-        "operationId": "ItemGroupController_removeItemFromGroup",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "itemId",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Remove an item from a item group",
-        "tags": [
-          "Company / Inventory / Item Group"
-        ]
-      },
-      "put": {
-        "operationId": "ItemGroupController_addItemToGroup",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "itemId",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Add an item to a item group",
-        "tags": [
-          "Company / Inventory / Item Group"
-        ]
-      }
-    },
     "/inventory/item-group/{id}": {
       "get": {
         "operationId": "ItemGroupController_get",
@@ -1202,6 +1024,162 @@
         "summary": "Get a item group by id",
         "tags": [
           "Company / Inventory / Item Group"
+        ]
+      }
+    },
+    "/inventory/item-tag": {
+      "post": {
+        "operationId": "ItemTagController_createItemTag",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemTagDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemTagResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Item Tag"
+        ]
+      },
+      "get": {
+        "operationId": "ItemTagController_getAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemTagsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Item Tag"
+        ]
+      }
+    },
+    "/inventory/item-tag/{id}": {
+      "get": {
+        "operationId": "ItemTagController_getOne",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemTagResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Item Tag"
+        ]
+      },
+      "patch": {
+        "operationId": "ItemTagController_update",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateItemTagDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetItemTagResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Company / Inventory / Item Tag"
         ]
       }
     },
@@ -2099,7 +2077,7 @@
             ]
           },
           "nominalBalance": {
-            "description": "The nominal balance of the control account",
+            "description": "The nominal balance type of the control account",
             "example": "DEBIT",
             "allOf": [
               {
@@ -2617,6 +2595,10 @@
             "minimum": 0,
             "description": "The reorder point of the item. Minimum value is 0",
             "example": 10
+          },
+          "meta": {
+            "type": "object",
+            "description": "The meta of the item"
           }
         },
         "required": [
@@ -2702,6 +2684,10 @@
             "minimum": 0,
             "description": "The reorder point of the item. Minimum value is 0",
             "example": 10
+          },
+          "meta": {
+            "type": "object",
+            "description": "The meta of the item"
           },
           "closingStock": {
             "type": "number",
@@ -2797,6 +2783,28 @@
             "minimum": 0,
             "description": "The opening stock of the item. Minimum value is 0",
             "example": 10
+          },
+          "tagIds": {
+            "description": "The tag ids of the item",
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000",
+              "123e4567-e89b-12d3-a456-426614174001"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "description": "The meta data of the item.",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "color": "red",
+              "temperature": "20°C"
+            }
           }
         },
         "required": [
@@ -2821,6 +2829,31 @@
         },
         "required": [
           "status"
+        ]
+      },
+      "CreateItemGroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item group",
+            "example": "Electronics"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "The description of the item group",
+            "example": "A group of electronics items"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "The account id to link to. For example `Stock-in-Hand`",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        },
+        "required": [
+          "name",
+          "accountId"
         ]
       },
       "ItemGroupDto": {
@@ -2848,6 +2881,26 @@
           "id"
         ]
       },
+      "GetItemGroupResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "error"
+            ],
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemGroupDto"
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
       "GetAllItemGroupsResponseDto": {
         "type": "object",
         "properties": {
@@ -2871,26 +2924,97 @@
           "data"
         ]
       },
-      "CreateItemGroupDto": {
+      "ItemTagAttributeDto": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The key of the attribute",
+            "example": "color"
+          },
+          "values": {
+            "description": "The constrained values of the attribute. The value for this key must be one of the values in the array.",
+            "example": [
+              "red",
+              "blue",
+              "green"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether the attribute is required",
+            "example": true
+          }
+        },
+        "required": [
+          "key",
+          "required"
+        ]
+      },
+      "CreateItemTagDto": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of the item group",
-            "example": "Electronics"
+            "description": "The name of the item tag",
+            "example": "Clothing"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the item tag",
+            "example": "Clothing items"
+          },
+          "attributes": {
+            "description": "The attributes of the item tag",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemTagAttributeDto"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "attributes"
+        ]
+      },
+      "ItemTagDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the item tag",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the item tag",
+            "example": "Clothing"
           },
           "description": {
             "type": "string",
             "nullable": true,
-            "description": "The description of the item group",
-            "example": "A group of electronics items"
+            "description": "The description of the item tag",
+            "example": "Clothing items"
+          },
+          "attributes": {
+            "description": "The attributes of the item tag",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemTagAttributeDto"
+            }
           }
         },
         "required": [
-          "name"
+          "id",
+          "name",
+          "attributes"
         ]
       },
-      "GetItemGroupResponseDto": {
+      "GetItemTagResponseDto": {
         "type": "object",
         "properties": {
           "status": {
@@ -2902,7 +3026,12 @@
             "example": "success"
           },
           "data": {
-            "$ref": "#/components/schemas/ItemGroupDto"
+            "description": "The item tag",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemTagDto"
+              }
+            ]
           }
         },
         "required": [
@@ -2910,7 +3039,7 @@
           "data"
         ]
       },
-      "GetAllItemsResponseDto": {
+      "GetAllItemTagsResponseDto": {
         "type": "object",
         "properties": {
           "status": {
@@ -2922,9 +3051,10 @@
             "example": "success"
           },
           "data": {
+            "description": "The item tags",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ItemDto"
+              "$ref": "#/components/schemas/ItemTagDto"
             }
           }
         },
@@ -2932,6 +3062,28 @@
           "status",
           "data"
         ]
+      },
+      "UpdateItemTagDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item tag",
+            "example": "Clothing"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the item tag",
+            "example": "Clothing items"
+          },
+          "attributes": {
+            "description": "The attributes of the item tag",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemTagAttributeDto"
+            }
+          }
+        }
       },
       "UnitDisplayNameDto": {
         "type": "object",
