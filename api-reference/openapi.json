@@ -53,7 +53,7 @@
             "schema": {
               "default": false,
               "example": false,
-              "type": "string"
+              "type": "boolean"
             }
           }
         ],
@@ -1064,11 +1064,11 @@
             "name": "ids",
             "required": false,
             "in": "query",
-            "description": "Filter by Item Tag IDs",
+            "description": "Filter by Item Tag IDs (single UUID or array of UUIDs)",
             "schema": {
               "example": [
-                "123",
-                "456"
+                "123e4567-e89b-12d3-a456-426614174000",
+                "123e4567-e89b-12d3-a456-426614174001"
               ],
               "type": "array",
               "items": {
@@ -1185,7 +1185,7 @@
         ]
       }
     },
-    "/inventory/unit": {
+    "/inventory/unit/{id}": {
       "get": {
         "operationId": "UnitController_findOne",
         "parameters": [
@@ -1200,16 +1200,9 @@
           },
           {
             "name": "id",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
+            "required": true,
+            "in": "path",
+            "description": "The id of the unit to get",
             "schema": {
               "type": "string"
             }
@@ -1228,6 +1221,38 @@
           }
         },
         "summary": "Get a unit",
+        "tags": [
+          "Company / Inventory / Unit"
+        ]
+      }
+    },
+    "/inventory/unit": {
+      "get": {
+        "operationId": "UnitController_findAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllUnitsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all units",
         "tags": [
           "Company / Inventory / Unit"
         ]
@@ -1268,38 +1293,6 @@
           }
         },
         "summary": "Create a unit",
-        "tags": [
-          "Company / Inventory / Unit"
-        ]
-      }
-    },
-    "/inventory/unit/all": {
-      "get": {
-        "operationId": "UnitController_findAll",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllUnitsResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all units",
         "tags": [
           "Company / Inventory / Unit"
         ]
@@ -3278,6 +3271,39 @@
           "data"
         ]
       },
+      "SummarisedUnitDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the unit",
+            "example": "Kilogram"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the unit",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "displayName": {
+            "description": "The display name of the unit",
+            "example": {
+              "plural": "Kilograms",
+              "singular": "Kilogram",
+              "abbreviation": "kg"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnitDisplayNameDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "displayName"
+        ]
+      },
       "GetAllUnitsResponseDto": {
         "type": "object",
         "properties": {
@@ -3292,7 +3318,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UnitDto"
+              "$ref": "#/components/schemas/SummarisedUnitDto"
             }
           }
         },
