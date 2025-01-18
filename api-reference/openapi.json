@@ -33,12 +33,56 @@
         ]
       },
       "get": {
+        "operationId": "CompanyController_getAllCompaniesByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "The id of the user for which the companies are to be fetched. This is a temporary solution. In future, the JWT token will be used to get the user id.",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "default",
+            "required": false,
+            "in": "query",
+            "description": "If true, only the default company is returned.",
+            "schema": {
+              "default": false,
+              "example": false,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllCompaniesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all companies by user.",
+        "tags": [
+          "Company"
+        ]
+      }
+    },
+    "/company/{id}": {
+      "get": {
         "operationId": "CompanyController_getCompany",
         "parameters": [
           {
             "name": "id",
             "required": true,
-            "in": "query",
+            "in": "path",
             "description": "The id of the company",
             "schema": {
               "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -65,37 +109,6 @@
       }
     },
     "/company/default": {
-      "get": {
-        "operationId": "CompanyController_getDefaultCompany",
-        "parameters": [
-          {
-            "name": "userId",
-            "required": true,
-            "in": "query",
-            "description": "The id of the user for which the default company is to be fetched",
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetCompanyResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get the default company for a user",
-        "tags": [
-          "Company"
-        ]
-      },
       "patch": {
         "operationId": "CompanyController_updateDefaultCompany",
         "parameters": [
@@ -123,71 +136,12 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "204": {
+            "description": "The default company for the user has been updated successfully"
           }
         },
         "summary": "Update the default company for a user",
-        "tags": [
-          "Company"
-        ]
-      }
-    },
-    "/company/all": {
-      "get": {
-        "operationId": "CompanyController_getAllCompaniesByUser",
-        "parameters": [
-          {
-            "name": "userId",
-            "required": true,
-            "in": "query",
-            "description": "The id of the user for which the companies are to be fetched",
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllCompaniesResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all companies by user",
-        "tags": [
-          "Company"
-        ]
-      }
-    },
-    "/company/migrate/{companyId}": {
-      "patch": {
-        "operationId": "CompanyController_migrate",
-        "parameters": [
-          {
-            "name": "companyId",
-            "required": true,
-            "in": "path",
-            "description": "The id of the company to be migrated",
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          }
-        },
-        "summary": "Migrate a company",
         "tags": [
           "Company"
         ]
@@ -251,37 +205,6 @@
           }
         },
         "summary": "Get a user by id",
-        "tags": [
-          "User"
-        ]
-      }
-    },
-    "/user/{email}": {
-      "get": {
-        "operationId": "UserController_getUserByEmail",
-        "parameters": [
-          {
-            "name": "email",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get a user by email",
         "tags": [
           "User"
         ]
@@ -655,6 +578,46 @@
         ]
       }
     },
+    "/bookkeeping/account/{id}": {
+      "get": {
+        "operationId": "AccountController_getAccount",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an account by id",
+        "tags": [
+          "Company / Bookkeeping / Account"
+        ]
+      }
+    },
     "/bookkeeping/control-account": {
       "get": {
         "operationId": "ControlAccountController_getAll",
@@ -665,6 +628,52 @@
             "description": "The id of the current active company",
             "required": true,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nature",
+            "required": false,
+            "in": "query",
+            "description": "Filter by the nature of the account",
+            "schema": {
+              "example": "PERSONAL",
+              "enum": [
+                "PERSONAL",
+                "NOMINAL",
+                "REAL"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by the type of the account",
+            "schema": {
+              "example": "ASSET",
+              "enum": [
+                "ASSET",
+                "LIABILITY",
+                "EQUITY",
+                "INCOME",
+                "EXPENSE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "nominalBalance",
+            "required": false,
+            "in": "query",
+            "description": "Filter by the nominal balance of the account",
+            "schema": {
+              "example": "DEBIT",
+              "enum": [
+                "DEBIT",
+                "CREDIT"
+              ],
               "type": "string"
             }
           }
@@ -727,7 +736,7 @@
         ]
       }
     },
-    "/inventory/item": {
+    "/inventory/item/{id}": {
       "get": {
         "operationId": "ItemController_find",
         "parameters": [
@@ -742,27 +751,9 @@
           },
           {
             "name": "id",
-            "required": false,
-            "in": "query",
-            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sku",
-            "required": false,
-            "in": "query",
-            "description": "The sku of the item to select. If provided, `name` is ignored.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "description": "The name of the item to select.",
+            "required": true,
+            "in": "path",
+            "description": "The id of the item to get",
             "schema": {
               "type": "string"
             }
@@ -780,7 +771,74 @@
             }
           }
         },
-        "summary": "Get an item",
+        "summary": "Get an item by id",
+        "tags": [
+          "Company / Inventory / Item"
+        ]
+      },
+      "delete": {
+        "operationId": "ItemController_delete",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The id of the item to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": "Item deleted successfully"
+          }
+        },
+        "summary": "Delete an item by id",
+        "tags": [
+          "Company / Inventory / Item"
+        ]
+      }
+    },
+    "/inventory/item": {
+      "get": {
+        "operationId": "ItemController_findAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllItemsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all items",
         "tags": [
           "Company / Inventory / Item"
         ]
@@ -821,95 +879,6 @@
           }
         },
         "summary": "Create an item",
-        "tags": [
-          "Company / Inventory / Item"
-        ]
-      },
-      "delete": {
-        "operationId": "ItemController_delete",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "required": false,
-            "in": "query",
-            "description": "The id of the item to select. If provided, `sku` and `name` are ignored.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sku",
-            "required": false,
-            "in": "query",
-            "description": "The sku of the item to select. If provided, `name` is ignored.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "description": "The name of the item to select.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete an item",
-        "tags": [
-          "Company / Inventory / Item"
-        ]
-      }
-    },
-    "/inventory/item/all": {
-      "get": {
-        "operationId": "ItemController_findAll",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllItemsWithClosingStockResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get all items",
         "tags": [
           "Company / Inventory / Item"
         ]
@@ -1004,6 +973,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "The id of the item group to get",
             "schema": {
               "type": "string"
             }
@@ -1021,7 +991,7 @@
             }
           }
         },
-        "summary": "Get a item group by id",
+        "summary": "Get an item group by id",
         "tags": [
           "Company / Inventory / Item Group"
         ]
@@ -1063,6 +1033,7 @@
             }
           }
         },
+        "summary": "Create a new item tag",
         "tags": [
           "Company / Inventory / Item Tag"
         ]
@@ -1078,6 +1049,32 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "withAttributes",
+            "required": false,
+            "in": "query",
+            "description": "Whether to include attributes",
+            "schema": {
+              "example": true,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ids",
+            "required": false,
+            "in": "query",
+            "description": "Filter by Item Tag IDs",
+            "schema": {
+              "example": [
+                "123",
+                "456"
+              ],
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
@@ -1092,6 +1089,7 @@
             }
           }
         },
+        "summary": "Get all item tags",
         "tags": [
           "Company / Inventory / Item Tag"
         ]
@@ -1099,7 +1097,7 @@
     },
     "/inventory/item-tag/{id}": {
       "get": {
-        "operationId": "ItemTagController_getOne",
+        "operationId": "ItemTagController_get",
         "parameters": [
           {
             "name": "x-company-id",
@@ -1114,6 +1112,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "The id of the item tag to get",
             "schema": {
               "type": "string"
             }
@@ -1131,6 +1130,7 @@
             }
           }
         },
+        "summary": "Get an item tag by id",
         "tags": [
           "Company / Inventory / Item Tag"
         ]
@@ -1151,6 +1151,7 @@
             "name": "id",
             "required": true,
             "in": "path",
+            "description": "The id of the item tag to update",
             "schema": {
               "type": "string"
             }
@@ -1178,6 +1179,7 @@
             }
           }
         },
+        "summary": "Update an item tag by id",
         "tags": [
           "Company / Inventory / Item Tag"
         ]
@@ -1303,7 +1305,7 @@
         ]
       }
     },
-    "/inventory/unit/conversion": {
+    "/inventory/unit/{sourceunitid}/conversion/{destUnitId}": {
       "post": {
         "operationId": "UnitConversionController_create",
         "parameters": [
@@ -1312,6 +1314,24 @@
             "in": "header",
             "description": "The id of the current active company",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sourceUnitId",
+            "required": true,
+            "in": "path",
+            "description": "The id of the source unit to create conversion for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destUnitId",
+            "required": true,
+            "in": "path",
+            "description": "The id of the destination unit to create conversion for.",
             "schema": {
               "type": "string"
             }
@@ -1344,56 +1364,6 @@
           "Company / Inventory / Unit / Conversion"
         ]
       },
-      "get": {
-        "operationId": "UnitConversionController_getAll",
-        "parameters": [
-          {
-            "name": "x-company-id",
-            "in": "header",
-            "description": "The id of the current active company",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "from",
-            "required": false,
-            "in": "query",
-            "description": "The unit to convert from",
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            }
-          },
-          {
-            "name": "to",
-            "required": false,
-            "in": "query",
-            "description": "The unit to convert to",
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllUnitConversionsResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get unit conversions by source unit, target unit or both",
-        "tags": [
-          "Company / Inventory / Unit / Conversion"
-        ]
-      },
       "patch": {
         "operationId": "UnitConversionController_update",
         "parameters": [
@@ -1407,22 +1377,20 @@
             }
           },
           {
-            "name": "from",
+            "name": "sourceUnitId",
             "required": true,
-            "in": "query",
-            "description": "The unit to convert from",
+            "in": "path",
+            "description": "The id of the source unit to update conversion for.",
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
               "type": "string"
             }
           },
           {
-            "name": "to",
+            "name": "destUnitId",
             "required": true,
-            "in": "query",
-            "description": "The unit to convert to",
+            "in": "path",
+            "description": "The id of the destination unit to update conversion for.",
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
               "type": "string"
             }
           }
@@ -1467,22 +1435,57 @@
             }
           },
           {
-            "name": "from",
+            "name": "sourceUnitId",
             "required": true,
-            "in": "query",
-            "description": "The unit to convert from",
+            "in": "path",
+            "description": "The id of the source unit to delete conversion for.",
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
               "type": "string"
             }
           },
           {
-            "name": "to",
+            "name": "destUnitId",
             "required": true,
-            "in": "query",
-            "description": "The unit to convert to",
+            "in": "path",
+            "description": "The id of the destination unit to delete conversion for.",
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": "The unit conversion was deleted successfully"
+          }
+        },
+        "summary": "Delete a unit conversion",
+        "tags": [
+          "Company / Inventory / Unit / Conversion"
+        ]
+      }
+    },
+    "/inventory/unit/{sourceunitid}/conversion": {
+      "get": {
+        "operationId": "UnitConversionController_getAll",
+        "parameters": [
+          {
+            "name": "x-company-id",
+            "in": "header",
+            "description": "The id of the current active company",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sourceUnitId",
+            "required": true,
+            "in": "path",
+            "description": "The id of the source unit to search conversions for.",
+            "schema": {
               "type": "string"
             }
           }
@@ -1493,13 +1496,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseDto"
+                  "$ref": "#/components/schemas/GetAllUnitConversionsResponseDto"
                 }
               }
             }
           }
         },
-        "summary": "Delete a unit conversion",
+        "summary": "Get all unit conversions of a source unit",
         "tags": [
           "Company / Inventory / Unit / Conversion"
         ]
@@ -1678,6 +1681,29 @@
           "data"
         ]
       },
+      "SummarisedCompanyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the company",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the company",
+            "example": "Acme Corp"
+          },
+          "logoOrIcon": {
+            "$ref": "#/components/schemas/LogoOrIcon"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "logoOrIcon"
+        ]
+      },
       "GetAllCompaniesResponseDto": {
         "type": "object",
         "properties": {
@@ -1692,7 +1718,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyDto"
+              "$ref": "#/components/schemas/SummarisedCompanyDto"
             }
           }
         },
@@ -1978,6 +2004,21 @@
           "name"
         ]
       },
+      "SummarisedRoleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
       "GetAllRolesResponseDto": {
         "type": "object",
         "properties": {
@@ -1992,7 +2033,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RoleDto"
+              "$ref": "#/components/schemas/SummarisedRoleDto"
             }
           }
         },
@@ -2020,80 +2061,6 @@
           "controlAccountId"
         ]
       },
-      "AccountNature": {
-        "type": "string",
-        "enum": [
-          "PERSONAL",
-          "REAL",
-          "NOMINAL"
-        ]
-      },
-      "AccountType": {
-        "type": "string",
-        "enum": [
-          "ASSET",
-          "LIABILITY",
-          "EQUITY",
-          "INCOME",
-          "EXPENSE"
-        ]
-      },
-      "BalanceType": {
-        "type": "string",
-        "enum": [
-          "DEBIT",
-          "CREDIT"
-        ]
-      },
-      "ControlAccountDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "description": "The unique identifier of the control account",
-            "example": 1
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the control account",
-            "example": "Cash"
-          },
-          "nature": {
-            "description": "The nature of the control account",
-            "example": "PERSONAL",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AccountNature"
-              }
-            ]
-          },
-          "type": {
-            "description": "The type of the control account",
-            "example": "ASSET",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AccountType"
-              }
-            ]
-          },
-          "nominalBalance": {
-            "description": "The nominal balance type of the control account",
-            "example": "DEBIT",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BalanceType"
-              }
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "nature",
-          "type",
-          "nominalBalance"
-        ]
-      },
       "AccountGroupDto": {
         "type": "object",
         "properties": {
@@ -2107,19 +2074,16 @@
             "description": "The name of the account group",
             "example": "Assets"
           },
-          "controlAccount": {
-            "description": "The control account of the account group",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ControlAccountDto"
-              }
-            ]
+          "controlAccountId": {
+            "type": "number",
+            "description": "The control account id of the account group",
+            "example": 1
           }
         },
         "required": [
           "id",
           "name",
-          "controlAccount"
+          "controlAccountId"
         ]
       },
       "GetAccountGroupResponseDto": {
@@ -2147,6 +2111,31 @@
           "data"
         ]
       },
+      "SummarisedAccountGroupDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account group",
+            "example": "Assets"
+          },
+          "controlAccountId": {
+            "type": "number",
+            "description": "The control account id of the account group",
+            "example": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "controlAccountId"
+        ]
+      },
       "GetAllAccountGroupsResponseDto": {
         "type": "object",
         "properties": {
@@ -2162,7 +2151,7 @@
             "description": "The account groups",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AccountGroupDto"
+              "$ref": "#/components/schemas/SummarisedAccountGroupDto"
             }
           }
         },
@@ -2458,6 +2447,42 @@
           "data"
         ]
       },
+      "SummarisedAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the account",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the account",
+            "example": "Cash"
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The id of the account group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the account",
+            "example": "PERSONAL",
+            "enum": [
+              "PERSONAL",
+              "NOMINAL",
+              "REAL"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "groupId",
+          "type"
+        ]
+      },
       "GetAllAccountsResponseDto": {
         "type": "object",
         "properties": {
@@ -2472,26 +2497,87 @@
           "data": {
             "type": "array",
             "items": {
-              "oneOf": [
-                {
-                  "type": "object",
-                  "$ref": "#/components/schemas/PersonalAccountDto"
-                },
-                {
-                  "type": "object",
-                  "$ref": "#/components/schemas/NominalAccountDto"
-                },
-                {
-                  "type": "object",
-                  "$ref": "#/components/schemas/RealAccountDto"
-                }
-              ]
+              "$ref": "#/components/schemas/SummarisedAccountDto"
             }
           }
         },
         "required": [
           "status",
           "data"
+        ]
+      },
+      "AccountNature": {
+        "type": "string",
+        "enum": [
+          "PERSONAL",
+          "REAL",
+          "NOMINAL"
+        ]
+      },
+      "AccountType": {
+        "type": "string",
+        "enum": [
+          "ASSET",
+          "LIABILITY",
+          "EQUITY",
+          "INCOME",
+          "EXPENSE"
+        ]
+      },
+      "BalanceType": {
+        "type": "string",
+        "enum": [
+          "DEBIT",
+          "CREDIT"
+        ]
+      },
+      "ControlAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The unique identifier of the control account",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the control account",
+            "example": "Cash"
+          },
+          "nature": {
+            "description": "The nature of the control account",
+            "example": "PERSONAL",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountNature"
+              }
+            ]
+          },
+          "type": {
+            "description": "The type of the control account",
+            "example": "ASSET",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountType"
+              }
+            ]
+          },
+          "nominalBalance": {
+            "description": "The nominal balance type of the control account",
+            "example": "DEBIT",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BalanceType"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "nature",
+          "type",
+          "nominalBalance"
         ]
       },
       "GetAllControlAccountsResponseDto": {
@@ -2632,7 +2718,7 @@
           "data"
         ]
       },
-      "ItemWithClosingStockDto": {
+      "SummarisedItemDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -2650,34 +2736,10 @@
             "description": "The sku of the item",
             "example": "GR-5-10K-101"
           },
-          "description": {
-            "type": "string",
-            "nullable": true,
-            "description": "The description of the item",
-            "example": "Gold ring with 10K gold and 5mm diameter"
-          },
           "unitId": {
             "type": "string",
             "description": "The id of the unit of the item",
             "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "cost": {
-            "type": "number",
-            "minimum": 0,
-            "description": "The cost of the item. Minimum value is 0",
-            "example": 100
-          },
-          "price": {
-            "type": "number",
-            "minimum": 0,
-            "description": "The price of the item. Minimum value is 0",
-            "example": 150
-          },
-          "msp": {
-            "type": "number",
-            "minimum": 0,
-            "description": "The msp of the item. Minimum value is 0",
-            "example": 120
           },
           "reorderPoint": {
             "type": "number",
@@ -2685,14 +2747,10 @@
             "description": "The reorder point of the item. Minimum value is 0",
             "example": 10
           },
-          "meta": {
-            "type": "object",
-            "description": "The meta of the item"
-          },
           "closingStock": {
             "type": "number",
             "minimum": 0,
-            "description": "The closing stock of the item. Minimum value is 0",
+            "description": "The closing stock of the item",
             "example": 10
           }
         },
@@ -2701,14 +2759,11 @@
           "id",
           "sku",
           "unitId",
-          "cost",
-          "price",
-          "msp",
           "reorderPoint",
           "closingStock"
         ]
       },
-      "GetAllItemsWithClosingStockResponseDto": {
+      "GetAllItemsResponseDto": {
         "type": "object",
         "properties": {
           "status": {
@@ -2722,7 +2777,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ItemWithClosingStockDto"
+              "$ref": "#/components/schemas/SummarisedItemDto"
             }
           }
         },
@@ -2815,22 +2870,6 @@
           "openingStock"
         ]
       },
-      "ResponseDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": [
-              "success",
-              "error"
-            ],
-            "example": "success"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
       "CreateItemGroupDto": {
         "type": "object",
         "properties": {
@@ -2901,6 +2940,25 @@
           "data"
         ]
       },
+      "SummarisedItemGroupDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the item group",
+            "example": "Gold Jewelry"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the item group",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ]
+      },
       "GetAllItemGroupsResponseDto": {
         "type": "object",
         "properties": {
@@ -2915,7 +2973,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ItemGroupDto"
+              "$ref": "#/components/schemas/SummarisedItemGroupDto"
             }
           }
         },
@@ -3039,6 +3097,52 @@
           "data"
         ]
       },
+      "SummarisedItemTagDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the item tag",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the item tag",
+            "example": "Clothing"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "SummarisedItemTagWithAttributesDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the item tag",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the item tag",
+            "example": "Clothing"
+          },
+          "attributes": {
+            "description": "The attributes of the item tag",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemTagAttributeDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "attributes"
+        ]
+      },
       "GetAllItemTagsResponseDto": {
         "type": "object",
         "properties": {
@@ -3051,10 +3155,17 @@
             "example": "success"
           },
           "data": {
-            "description": "The item tags",
             "type": "array",
+            "description": "The item tags",
             "items": {
-              "$ref": "#/components/schemas/ItemTagDto"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/SummarisedItemTagDto"
+                },
+                {
+                  "$ref": "#/components/schemas/SummarisedItemTagWithAttributesDto"
+                }
+              ]
             }
           }
         },
@@ -3215,16 +3326,6 @@
       "CreateUnitConversionDto": {
         "type": "object",
         "properties": {
-          "from": {
-            "type": "string",
-            "description": "The unit to convert from",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "to": {
-            "type": "string",
-            "description": "The unit to convert to",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
           "factor": {
             "type": "number",
             "minimum": 1,
@@ -3233,8 +3334,6 @@
           }
         },
         "required": [
-          "from",
-          "to",
           "factor"
         ]
       },
@@ -3243,17 +3342,16 @@
         "properties": {
           "from": {
             "type": "string",
-            "description": "The unit to convert from",
+            "description": "The id of the source unit",
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "to": {
             "type": "string",
-            "description": "The unit to convert to",
+            "description": "The id of the destination unit",
             "example": "123e4567-e89b-12d3-a456-426614174000"
           },
           "factor": {
             "type": "number",
-            "minimum": 1,
             "description": "The conversion factor",
             "example": 1.5
           }
@@ -3310,23 +3408,16 @@
       "UpdateUnitConversionDto": {
         "type": "object",
         "properties": {
-          "from": {
-            "type": "string",
-            "description": "The unit to convert from",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
-          "to": {
-            "type": "string",
-            "description": "The unit to convert to",
-            "example": "123e4567-e89b-12d3-a456-426614174000"
-          },
           "factor": {
             "type": "number",
             "minimum": 1,
             "description": "The conversion factor",
             "example": 1.5
           }
-        }
+        },
+        "required": [
+          "factor"
+        ]
       }
     }
   }
